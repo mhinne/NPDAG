@@ -1,2 +1,2 @@
 # A Bayesian nonparametric model for directed acyclic graphs
-This code implements a Metropolis MCMC sampler for the work by [Patrick Dallaire et al., 2018](http://bayesiandeeplearning.org/2018/papers/50.pdf).
+This code implements a Metropolis MCMC sampler for the Bayesian nonparametric prior on directed acyclic graphs (DAGs) by [Patrick Dallaire et al., 2018](http://bayesiandeeplearning.org/2018/papers/50.pdf). The npdag_simple_datasets.py script applies the method in conjunction with a simple and nearly parameter-free likelihood for binary classification.
