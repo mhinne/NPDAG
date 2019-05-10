@@ -17,6 +17,7 @@ import argparse
 import sklearn.datasets as data
 import sklearn.linear_model as LogisticRegression
 
+
 def get_data(dataset, split=0.2):
     
     if dataset == 'breast cancer':
