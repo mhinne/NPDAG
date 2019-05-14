@@ -102,11 +102,12 @@ class Node(object):
         if is_target:
             self.is_target = is_target
 
-    def is_inactive(self, inpt):
-        active_parents = [p for p in self.parents if not p.is_inactive(inpt)]
+    @property
+    def is_inactive(self):
+        active_parents = [p for p in self.parents if not p.is_inactive]
         if active_parents:
             return False
-        elif self in inpt.keys():
+        elif self.is_observed:
             return False
         else:
             return True
@@ -126,7 +127,7 @@ class Node(object):
 
 class Network(chainer.ChainList):
 
-    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 60}):
+    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 20}):
         names = [node.name for node in nodes]
         assert (sorted(names) == sorted(list(set(names))))
         self.prior_parameters = prior_parameters
@@ -169,6 +170,10 @@ class Network(chainer.ChainList):
     @property
     def num_parameters(self):
         return sum([node.num_parameters for node in self.nodes])
+
+    @property
+    def num_active_parameters(self):
+        return sum([node.num_parameters for node in self.nodes if not node.is_inactive])
 
 #    def is_orphan(self, node_name):
 #        return self.get_node(node_name).is_orphan
@@ -228,26 +233,27 @@ class Network(chainer.ChainList):
         targets = {node.name: node.data[indices] for node in self.nodes
                    if node.is_target}
         forward_output = self.forward_pass(indices)
-        return sum([chainer.functions.softmax_cross_entropy(x=forward_output[node.name], t=targets[node.name])
-                    for node in self.nodes if node.name in targets])
+        return -1*dataset_size*sum([chainer.functions.softmax_cross_entropy(x=forward_output[node.name], t=targets[node.name])
+                                    for node in self.nodes if node.name in targets])
 
     def compute_model_evidence(self, batch_size):
-        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0]  # TODO: refactor
+        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][
+            0]  # TODO: refactor
         log_lk = self.compute_log_lk(batch_size)
-        return dataset_size*log_lk #- self.num_parameters #*np.log(dataset_size)
+        penalization = 0 #self.num_active_parameters #self.num_active_parameters*np.log(dataset_size)/float(2)
+        return log_lk - penalization
 
     def train_parameters(self, num_itr, batch_size, optimizer=chainer.optimizers.Adam(alpha=0.001)):
-        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0] #TODO: refactor
         optimizer.setup(self)
         loss_list = []
         for itr in range(num_itr):
             self.zerograds()
-            loss = self.compute_log_lk(batch_size=batch_size)
+            loss = -1*self.compute_log_lk(batch_size=batch_size)
             loss.backward()
             optimizer.update()
             loss_list.append(float(loss.data))
-        plt.plot(loss_list)
-        plt.show()
+        #plt.plot(loss_list)
+        #plt.show()
 
     def clear_data(self):
         for node in self.nodes:
@@ -260,7 +266,7 @@ class Network(chainer.ChainList):
         node_activities = inpt
         parent_counts = {node: 0 for node in self.nodes}
         partial_activities = {node: 0. for node in self.nodes}
-        inactive_parents = {node: len([p for p in node.parents if p.is_inactive(inpt)])
+        inactive_parents = {node: len([p for p in node.parents if p.is_inactive])
                             for node in self.nodes}
         while set(node_activities.keys()):
             forward_pass = [node(activity)
@@ -417,8 +423,9 @@ class Network(chainer.ChainList):
         log_prior_ratio = DAG_proposal.log_prior_probability() - self.log_prior_probability()
         return DAG_proposal, log_prior_ratio
 
+
     # Plot methods
-    def plot(self, ax=None, showlegend=True):
+    def plot(self, ax=None, showlegend=True, save_name=None, show=False):
         nxG = nx.DiGraph()
         for node in self.nodes:
             nxG.add_node(node.name)
@@ -465,35 +472,45 @@ class Network(chainer.ChainList):
 
         if showlegend: ax.legend(['Observed (fixed)', 'Observed', 'Latent'])
 
+        if save_name:
+            plt.savefig(save_name)
+
+        if show:
+            plt.show()
+
 class NetworkSampler(object):
 
-    def __init__(self, initial_network):
-        initial_network.train_parameters(num_itr=300, batch_size=50) #TODO: work in progress
+    def __init__(self, initial_network, num_itr, batch_size, evidence_batch_size):
+        initial_network.train_parameters(num_itr=num_itr, batch_size=batch_size) #TODO: work in progress
         self.network_samples = [copy.deepcopy(initial_network)]
+        self.batch_size = batch_size
+        self.num_itr = num_itr
+        self.evidence_batch_size = evidence_batch_size
 
     # Network training
-    def update_network(self, num_itr, batch_size, evidence_batch_size, num_samples):
+    def update_network(self, num_samples):
         current_sample = self.network_samples[-1]
-        for _ in range(num_samples):
+        sample_index = 0
+        while sample_index < num_samples:
             for sampler in [current_sample.resample_graph_connection, current_sample.birth_death_sample, current_sample.resample_reputation]:
 
                 DAG_proposal, log_acceptance_ratio = sampler()
 
-                # TODO: Debug
-                DAG_proposal.plot()
-                plt.show()
-
-                DAG_proposal.train_parameters(num_itr, batch_size)
-                proposed_log_model_evidence = float(DAG_proposal.compute_model_evidence(evidence_batch_size).data)
-                current_log_model_evidence = float(current_sample.compute_model_evidence(evidence_batch_size).data)
-                corrected_log_acceptance_ratio = log_acceptance_ratio #+ proposed_log_model_evidence - current_log_model_evidence
+                DAG_proposal.train_parameters(self.num_itr, self.batch_size)
+                proposed_log_model_evidence = float(DAG_proposal.compute_model_evidence(self.evidence_batch_size).data)
+                current_log_model_evidence = float(current_sample.compute_model_evidence(self.evidence_batch_size).data)
+                corrected_log_acceptance_ratio = log_acceptance_ratio + proposed_log_model_evidence - current_log_model_evidence
                 acceptance_ratio = np.exp(corrected_log_acceptance_ratio)
                 print(acceptance_ratio) # TODO: Debug
                 if acceptance_ratio >= 1 or np.random.binomial(1, acceptance_ratio) == 1:
                     #sample = copy.deepcopy(DAG_proposal)
                     #sample.clear_data()
                     #self.network_samples.append(sample)
-                    current_sample = self.network_samples[-1]
+                    current_sample = DAG_proposal
+                    DAG_proposal.plot(save_name='figures/Sample {}.png'.format(sample_index), show=False)
+                    sample_index += 1
+                    print(sample_index) #DEBUG
+
 
 
 ## Dataset ##
@@ -509,11 +526,8 @@ train_target = chainer.Variable(np.stack([tg.astype("int32")
 
 ## Initial network ##
 a = Node(children=set(), reputation=0., name="a")
-b = Node(children={a}, reputation=0.25, name="b")
-c = Node(children={a}, reputation=0.5, name="c")
-d = Node(children={a}, reputation=0.75, name="d")
 e = Node(children={a}, reputation=1., name="e")
-network = Network({a, b, c, d, e})
+network = Network({a, e})
 a.observe(data=train_target, is_target=True)
 e.observe(data=train_in, is_target=False)
 
@@ -522,8 +536,8 @@ e.observe(data=train_in, is_target=False)
 ## Training ##
 #network.train_parameters(num_itr=500, batch_size=50)
 
-sampler = NetworkSampler(initial_network=network)
-sampler.update_network(num_itr=200, batch_size=200, evidence_batch_size=2, num_samples=50)
+sampler = NetworkSampler(initial_network=network, num_itr=400, batch_size=200, evidence_batch_size=10000)
+sampler.update_network(num_samples=50)
 
 network.plot()
 plt.show()

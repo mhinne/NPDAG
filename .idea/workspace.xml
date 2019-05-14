@@ -22,23 +22,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="25" />
+          <entry key="py" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="25" />
+          <entry key="Python" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="126" />
-          <entry key="py" value="9884" />
+          <entry key="py" value="10570" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="10010" />
+          <entry key="Python" value="10696" />
         </counts>
       </usages-collector>
     </session>
@@ -49,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="7095">
-              <caret line="548" column="78" lean-forward="true" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
+              <caret line="548" column="78" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -66,27 +66,36 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="497" lean-forward="true" selection-start-line="497" selection-end-line="497" />
+            <state relative-caret-position="-195">
+              <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1557770345757" expanded="true" signature="2760:3263" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="2923:3104" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="3139:3263" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="5238:5305" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="5509:5550" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="9031:9135" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="10258:10418" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="10743:10809" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="11413:11577" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="13219:13390" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="18076:18082" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="19914:21932" ph="..." />
-                <marker date="1557770345757" expanded="true" signature="21474:21476" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="2760:3277" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="2923:3104" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="3139:3277" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="5354:5445" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="5649:5690" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="9156:9260" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="10377:10537" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="10862:10928" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="11532:11696" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="13338:13509" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="18195:18202" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="20161:22449" ph="..." />
+                <marker date="1557829566439" expanded="true" signature="21991:21993" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/array/reshape.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
             </state>
           </provider>
         </entry>
@@ -115,6 +124,7 @@
       <find>get_newparent_reputation_bound</find>
       <find>get_active_nodes</find>
       <find>dataset_size</find>
+      <find>is_inactive</find>
     </findStrings>
     <replaceStrings>
       <replace>node_name</replace>
@@ -221,7 +231,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1175" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24972677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -229,7 +238,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291866" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3291866" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -244,30 +253,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
-          <line>367</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
-          <line>368</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
-          <line>371</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -390,7 +375,7 @@
     <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7095">
-          <caret line="548" column="78" lean-forward="true" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
+          <caret line="548" column="78" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -504,24 +489,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="497" lean-forward="true" selection-start-line="497" selection-end-line="497" />
+        <state relative-caret-position="-195">
+          <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1557770345757" expanded="true" signature="2760:3263" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="2923:3104" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="3139:3263" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="5238:5305" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="5509:5550" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="9031:9135" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="10258:10418" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="10743:10809" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="11413:11577" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="13219:13390" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="18076:18082" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="19914:21932" ph="..." />
-            <marker date="1557770345757" expanded="true" signature="21474:21476" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="2760:3277" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="2923:3104" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="3139:3277" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="5354:5445" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="5649:5690" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="9156:9260" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="10377:10537" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="10862:10928" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="11532:11696" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="13338:13509" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="18195:18202" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="20161:22449" ph="..." />
+            <marker date="1557829566439" expanded="true" signature="21991:21993" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/array/reshape.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
         </state>
       </provider>
     </entry>
