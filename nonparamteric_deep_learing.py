@@ -8,29 +8,35 @@ import scipy.special as spc
 import utility
 import matplotlib.pyplot as plt
 
+import networkx as nx
+
+
 
 def create_link(parent, child):
     input_size, output_size = get_sizes(child.reputation, parent.reputation)
 
     if child.reputation == 0:
-        return chainer.links.Linear(input_size, output_size)
+        return chainer.links.Linear(None, output_size)
 
     if parent.reputation == 1:
         return chainer.links.Convolution2D(input_size, output_size, ksize=3, pad=1)
-
-    return chainer.links.Convolution2D(input_size, output_size, ksize=3, stride=input_size/output_size, pad=1)
+    return chainer.links.Convolution2D(input_size, output_size, ksize=3, stride=int(output_size/input_size), pad=1)
 
 
 def get_sizes(child_reputation, parent_reputation, class_count=10, bin_count=5, offset=1):
-    get_size = lambda reputation: 2 ** (int(bin_count * reputation) + offset)
+    get_size = lambda reputation, k=1: 2 ** (int(bin_count * (1 - reputation)**k) + offset)
 
     if child_reputation == 0:
-        return None, class_count
+        child_size = class_count
+    else:
+        child_size = get_size(child_reputation)
 
     if parent_reputation == 1:
-        return None, get_size(child_reputation)
+        parent_size = None
+    else:
+        parent_size = get_size(parent_reputation)
 
-    return get_size(parent_reputation), get_size(child_reputation)
+    return parent_size, child_size
 
 
 def ensemble_input(forward_pass, partial_activities, parent_counts, inactive_parents):
@@ -43,18 +49,24 @@ def ensemble_input(forward_pass, partial_activities, parent_counts, inactive_par
         partial_activities[node] += sum(node_partial_activities)
         parent_counts[node] += len(node_partial_activities)
         if parent_counts[node] == node.num_parents - inactive_parents[node]:
-            node_activities[node] = chainer.functions.relu(partial_activities.pop(node)) #TODO: activation function here
+            if node.is_target:
+                activation = lambda x: x
+            else:
+                activation = lambda x: chainer.functions.relu(x)
+            node_activities[node] = activation(partial_activities.pop(node))
     return node_activities, partial_activities, parent_counts
 
 
 class Node(object):
 
-    def __init__(self, children, reputation, name, is_observed=False, xpos=None):
+    def __init__(self, children, reputation, name, is_observed=False, is_target=False, xpos=None):
         self.children = set(children)
         self.parents = None
         self.reputation = reputation
         self.name = name
         self.is_observed = is_observed
+        self.is_target = is_target
+        self.data = None
         self.links = {child: create_link(self, child) for child in self.children}
         if xpos is None:
             self.xpos = np.random.uniform(0, 1)
@@ -78,6 +90,17 @@ class Node(object):
     @property
     def is_singleton(self):
         return self.num_children == 1
+
+    @property
+    def num_parameters(self):
+        return sum([np.prod(link.W.shape) + np.prod(link.b.shape) for link in self.links.values()
+                    if link.W.data is not None and link.b.data is not None])
+
+    def observe(self, data, is_target):
+        self.is_observed = True
+        self.data = data
+        if is_target:
+            self.is_target = is_target
 
     def is_inactive(self, inpt):
         active_parents = [p for p in self.parents if not p.is_inactive(inpt)]
@@ -103,7 +126,7 @@ class Node(object):
 
 class Network(chainer.ChainList):
 
-    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 1}):
+    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 60}):
         names = [node.name for node in nodes]
         assert (sorted(names) == sorted(list(set(names))))
         self.prior_parameters = prior_parameters
@@ -143,6 +166,10 @@ class Network(chainer.ChainList):
     def num_edges(self):
         return sum([len(children) for _, children in self.children.items()])
 
+    @property
+    def num_parameters(self):
+        return sum([node.num_parameters for node in self.nodes])
+
 #    def is_orphan(self, node_name):
 #        return self.get_node(node_name).is_orphan
 #
@@ -156,7 +183,7 @@ class Network(chainer.ChainList):
         for node in self.nodes:
             node.parents = set([other_node for other_node in self.nodes if node in other_node.children])
         self.links = reduce(lambda u, v: u.union(v), [set(node.links.values()) for node in self.nodes])
-        super().__init__(*self.links)
+        super(Network, self).__init__(*self.links)
 
     def get_node(self, node_name):
         target_node = [node for node in self.nodes if node.name is node_name][0]
@@ -190,16 +217,42 @@ class Network(chainer.ChainList):
 
     def remove_node(self, node_name):
         node = self.get_node(node_name)
-        [self.remove_edge(p.name, node_name) for p in node.parents]
-        [self.remove_edge(node_name, c.name) for c in node.children]
+        [self.remove_edge(p.name, node_name) for p in copy.copy(node.parents)]
+        [self.remove_edge(node_name, c.name) for c in copy.copy(node.parents)]
         self.nodes.remove(node)
         self._update_network()
 
-    def compute_log_lk(self, dataset, batch_size, target_name):
-        pass
+    def compute_log_lk(self, batch_size):
+        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0] #TODO: refactor
+        indices = random.sample(range(dataset_size), batch_size)
+        targets = {node.name: node.data[indices] for node in self.nodes
+                   if node.is_target}
+        forward_output = self.forward_pass(indices)
+        return sum([chainer.functions.softmax_cross_entropy(x=forward_output[node.name], t=targets[node.name])
+                    for node in self.nodes if node.name in targets])
 
-    def compute_model_evidence(self, dataset, batch_size, target_name):
-        pass
+    def compute_model_evidence(self, batch_size):
+        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0]  # TODO: refactor
+        log_lk = self.compute_log_lk(batch_size)
+        return dataset_size*log_lk #- self.num_parameters #*np.log(dataset_size)
+
+    def train_parameters(self, num_itr, batch_size, optimizer=chainer.optimizers.Adam(alpha=0.001)):
+        dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0] #TODO: refactor
+        optimizer.setup(self)
+        loss_list = []
+        for itr in range(num_itr):
+            self.zerograds()
+            loss = self.compute_log_lk(batch_size=batch_size)
+            loss.backward()
+            optimizer.update()
+            loss_list.append(float(loss.data))
+        plt.plot(loss_list)
+        plt.show()
+
+    def clear_data(self):
+        for node in self.nodes:
+            if node.is_observed:
+                node.data = None
 
     def __call__(self, inpt):
         inpt = {self.get_node(name): value for name, value in inpt.items()}
@@ -219,6 +272,10 @@ class Network(chainer.ChainList):
             oupt.update(node_activities)
         oupt = {key.name: value for key, value in oupt.items()}
         return oupt
+
+    def forward_pass(self, indices):
+        input_dict = {node.name: node.data[indices, :] for node in self.nodes if node.is_observed and not node.is_target}
+        return self(input_dict)
 
     ## Sampler methods ##
         # Find all *latent* nodes with lower reputation -> we force observed nodes at reputation 0 or 1 (input/output)
@@ -295,11 +352,13 @@ class Network(chainer.ChainList):
         alpha = self.prior_parameters['alpha']
 
         DAG_proposal = self.copy()
-        candidate_parents = []
-        while not candidate_parents:
-            potential_child = random.choice(list(DAG_proposal.nodes))
-            candidate_parents = DAG_proposal.get_potential_parents(potential_child=potential_child)
-        potential_parent = random.choice(candidate_parents)
+        potential_pairs = {node: DAG_proposal.get_potential_parents(potential_child=node) for node in self.nodes
+                           if not len(DAG_proposal.get_potential_parents(potential_child=node)) == 0}
+        if not potential_pairs:
+            return DAG_proposal, -np.inf
+
+        potential_child = random.choice(list(potential_pairs.keys()))
+        potential_parent = random.choice(potential_pairs[potential_child])
 
         m_k = potential_parent.num_children
         m_k_i = m_k if potential_child not in potential_parent.children else m_k - 1
@@ -341,12 +400,15 @@ class Network(chainer.ChainList):
 
     def resample_reputation(self):
         DAG_proposal = self.copy()
-        candidate_node = random.choice([node for node in DAG_proposal.nodes if not node.is_observed])
+        possible_nodes = [node for node in DAG_proposal.nodes if not node.is_observed]
+        if not possible_nodes:
+            return DAG_proposal, -np.inf
+        candidate_node = random.choice(possible_nodes)
         candidate_name = candidate_node.name
         candidate_parents = candidate_node.parents
         candidate_children = candidate_node.children
-        upper_reputation_bound = np.min([node.popularity for node in candidate_node.parents])
-        lower_reputation_bound = np.max([node.popularity for node in candidate_node.children])
+        upper_reputation_bound = 1. if not candidate_node.parents else np.min([node.reputation for node in candidate_node.parents])
+        lower_reputation_bound = 0. if not candidate_node.children else np.max([node.reputation for node in candidate_node.children])
         sampled_reputation = np.random.uniform(lower_reputation_bound, upper_reputation_bound)
         DAG_proposal.remove_node(node_name=candidate_name)
         DAG_proposal.add_node(parents_names=[p.name for p in candidate_parents],
@@ -355,24 +417,116 @@ class Network(chainer.ChainList):
         log_prior_ratio = DAG_proposal.log_prior_probability() - self.log_prior_probability()
         return DAG_proposal, log_prior_ratio
 
+    # Plot methods
+    def plot(self, ax=None, showlegend=True):
+        nxG = nx.DiGraph()
+        for node in self.nodes:
+            nxG.add_node(node.name)
+
+        edgelabels = dict()
+        for fromnode in self.nodes:
+            if fromnode.name in self.children:
+                for tonode in self.children[fromnode.name]:
+                    nxG.add_edge(fromnode.name, tonode.name)
+                    #edgekey = '{:d}_{:d}'.format(fromnode.name, tonode.name)
+
+        nodelabels = dict()
+        positions = dict()
+        for node in self.nodes:
+            positions[node.name] = [node.xpos, node.reputation]
+            nodelabels[node.name] = node.name
+        nodelist = nxG.nodes()
+
+        colormap = {'fixed': 'y', 'observed': 'r', 'latent': 'g'}
+        colors = []
+        for node in nodelist:
+            if self.reputations[node] in (0.0, 1.0):
+                colors += [colormap['fixed']]
+            else:
+                if self.is_observed[node]:
+                    colors += [colormap['observed']]
+                else:
+                    colors += [colormap['latent']]
+        if ax is None:
+            f = plt.figure()
+            ax = f.gca()
+
+        for label in colormap.keys():
+            ax.plot([0], [0], color=colormap[label], label=label)
+
+        nx.draw_networkx(nxG, ax=ax, pos=positions, arrows=True, nodelist=nodelist,
+                         node_color=colors, labels=nodelabels, width=2, arrowsize=25, arrowstyle='->')
+        nx.draw_networkx_edge_labels(nxG, ax=ax, edge_labels=edgelabels, pos=positions, font_size=20)
+
+        ax.set_ylim(-0.2, 1.2)
+        ax.set_ylabel('Reputation')
+        ax.set_xlabel('Arbitrary horizontal coordinate')
+        ax.set_xlim(0., 1.)
+
+        if showlegend: ax.legend(['Observed (fixed)', 'Observed', 'Latent'])
+
+class NetworkSampler(object):
+
+    def __init__(self, initial_network):
+        initial_network.train_parameters(num_itr=300, batch_size=50) #TODO: work in progress
+        self.network_samples = [copy.deepcopy(initial_network)]
+
+    # Network training
+    def update_network(self, num_itr, batch_size, evidence_batch_size, num_samples):
+        current_sample = self.network_samples[-1]
+        for _ in range(num_samples):
+            for sampler in [current_sample.resample_graph_connection, current_sample.birth_death_sample, current_sample.resample_reputation]:
+
+                DAG_proposal, log_acceptance_ratio = sampler()
+
+                # TODO: Debug
+                DAG_proposal.plot()
+                plt.show()
+
+                DAG_proposal.train_parameters(num_itr, batch_size)
+                proposed_log_model_evidence = float(DAG_proposal.compute_model_evidence(evidence_batch_size).data)
+                current_log_model_evidence = float(current_sample.compute_model_evidence(evidence_batch_size).data)
+                corrected_log_acceptance_ratio = log_acceptance_ratio #+ proposed_log_model_evidence - current_log_model_evidence
+                acceptance_ratio = np.exp(corrected_log_acceptance_ratio)
+                print(acceptance_ratio) # TODO: Debug
+                if acceptance_ratio >= 1 or np.random.binomial(1, acceptance_ratio) == 1:
+                    #sample = copy.deepcopy(DAG_proposal)
+                    #sample.clear_data()
+                    #self.network_samples.append(sample)
+                    current_sample = self.network_samples[-1]
 
 
+## Dataset ##
+number_pixels = 28*28
+number_output_classes = 10
+train, test = chainer.datasets.get_mnist()
+train_in, train_target = zip(*train)
+train_in = chainer.Variable(np.stack([np.reshape(image, newshape=(1, 28, 28))
+                                      for image in train_in]).astype("float32"))
+train_target = chainer.Variable(np.stack([tg.astype("int32")
+                                          for tg in train_target]))
 
-a0 = Node(children=set(), reputation=0., name="a0", is_observed=True)
-a1 = Node(children=set(), reputation=0., name="a1", is_observed=True)
-b = Node(children={a0, a1}, reputation=0.25, name="b")
-c = Node(children={b, a0}, reputation=1., name="c", is_observed=True)
-d = Node(children={b}, reputation=1., name="d", is_observed=True)
-network = Network({a0, a1, b, c, d})
-network.add_node(parents_names={"d"}, children_names={"a0"}, name="e", reputation=0.8)
-network.add_edge(parent_name="d", child_name="a1")
-network.remove_edge(parent_name="b", child_name="a0")
 
-network, _ = network.birth_death_sample()
-network, _ = network.birth_death_sample()
-network, _ = network.birth_death_sample()
-network, _ = network.birth_death_sample()
-network, _ = network.birth_death_sample()
+## Initial network ##
+a = Node(children=set(), reputation=0., name="a")
+b = Node(children={a}, reputation=0.25, name="b")
+c = Node(children={a}, reputation=0.5, name="c")
+d = Node(children={a}, reputation=0.75, name="d")
+e = Node(children={a}, reputation=1., name="e")
+network = Network({a, b, c, d, e})
+a.observe(data=train_target, is_target=True)
+e.observe(data=train_in, is_target=False)
+
+## Test model ##
+
+## Training ##
+#network.train_parameters(num_itr=500, batch_size=50)
+
+sampler = NetworkSampler(initial_network=network)
+sampler.update_network(num_itr=200, batch_size=200, evidence_batch_size=2, num_samples=50)
+
+network.plot()
+plt.show()
 
 print("Reputation intervals: " + str(list(network.get_reputation_intervals())))
 print("Num edges: " + str(network.num_edges))

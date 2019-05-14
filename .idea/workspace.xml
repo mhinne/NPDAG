@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dff37e3e-c5f4-4f97-a61a-1d3953231a87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/directed_acyclic_graphs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nonparamteric_deep_learing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/npdag_simple_datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/npdag_simple_datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nonparamteric_deep_learing.py" beforeDir="false" afterPath="$PROJECT_DIR$/nonparamteric_deep_learing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,40 +22,29 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="10" />
+          <entry key="py" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="10" />
+          <entry key="Python" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="126" />
-          <entry key="py" value="5879" />
+          <entry key="py" value="9884" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="6005" />
+          <entry key="Python" value="10010" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/forwardmodels.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -74,29 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/directed_acyclic_graphs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2149">
-              <caret line="290" column="36" lean-forward="true" selection-start-line="290" selection-start-column="36" selection-end-line="290" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="482" selection-start-line="482" selection-end-line="482" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/link.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="241" selection-start-line="241" selection-end-line="241" />
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -104,35 +69,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="193" selection-start-line="193" selection-end-line="193" />
+            <state relative-caret-position="678">
+              <caret line="497" lean-forward="true" selection-start-line="497" selection-end-line="497" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1557498875515" expanded="true" signature="2471:2595" ph="..." />
-                <marker date="1557498875515" expanded="true" signature="4730:4771" ph="..." />
-                <marker date="1557498875515" expanded="true" signature="8314:8380" ph="..." />
-                <marker date="1557498875515" expanded="true" signature="8984:9148" ph="..." />
-                <marker date="1557498875515" expanded="true" signature="10790:10961" ph="..." />
-                <marker date="1557498875515" expanded="true" signature="15322:15325" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="2760:3263" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="2923:3104" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="3139:3263" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="5238:5305" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="5509:5550" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="9031:9135" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="10258:10418" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="10743:10809" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="11413:11577" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="13219:13390" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="18076:18082" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="19914:21932" ph="..." />
+                <marker date="1557770345757" expanded="true" signature="21474:21476" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/random.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="260" selection-start-line="260" selection-end-line="260" />
             </state>
           </provider>
         </entry>
@@ -156,10 +110,11 @@
       <find>pos</find>
       <find>.n_obs</find>
       <find>is_observe</find>
-      <find>get_active_nodes</find>
       <find>get_reputations</find>
       <find>get_reputation_bound</find>
       <find>get_newparent_reputation_bound</find>
+      <find>get_active_nodes</find>
+      <find>dataset_size</find>
     </findStrings>
     <replaceStrings>
       <replace>node_name</replace>
@@ -266,6 +221,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1175" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24972677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -273,7 +229,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291866" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3291866" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -294,61 +250,121 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
-          <line>313</line>
-          <option name="timeStamp" value="15" />
+          <line>367</line>
+          <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
-          <line>334</line>
-          <option name="timeStamp" value="19" />
+          <line>368</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/nonparamteric_deep_learing.py</url>
+          <line>371</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>potential_pairs</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>{node1.name: node2.name for node1, node2 in potential_pairs}</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>train_in.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>x.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>W.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dataset_size*log_lk - self.num_parameters</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>np.log(dataset_size)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.num_parameters</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.num_parameters*np.log(dataset_size)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>list(DAG_proposal.nodes)</expression-string>
+        <expression-string>[image[0, 0, 28, 28] for image in train_in]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>list(DAG_proposal.)</expression-string>
+        <expression-string>[image[:, :, 28, 28] for image in train_in]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>DAG_proposal.nodes</expression-string>
+        <expression-string>[image[:,:, 28,28] for image in train_in]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.reputations</expression-string>
+        <expression-string>np.stack(train_in).shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>network.get_number_parameters</expression-string>
+        <expression-string>np.stack(train_in)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>network[3].W.size</expression-string>
+        <expression-string>train_in[0].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>network[1].W.size</expression-string>
+        <expression-string>train_in, train_target = zip(*train)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>network[0].W.size</expression-string>
+        <expression-string>train</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>network[0].W.data.size</expression-string>
+        <expression-string>train[0][1].shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>train[0][0].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -371,13 +387,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="482" selection-start-line="482" selection-end-line="482" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7095">
@@ -395,6 +404,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/directed_acyclic_graphs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/numpy/core/fromnumeric.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="2441" selection-start-line="2441" selection-end-line="2441" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="241" selection-start-line="241" selection-end-line="241" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/array/get_item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="320" selection-start-line="320" selection-end-line="320" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/numpy/core/_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/loss/softmax_cross_entropy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -402,35 +460,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/random.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/variable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="260" selection-start-line="260" selection-end-line="260" />
+        <state relative-caret-position="1280">
+          <caret line="702" selection-start-line="702" selection-end-line="702" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/directed_acyclic_graphs.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/copy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2149">
-          <caret line="290" column="36" lean-forward="true" selection-start-line="290" selection-start-column="36" selection-end-line="290" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-942">
+          <caret line="190" column="12" lean-forward="true" selection-start-line="190" selection-start-column="12" selection-end-line="190" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="482" selection-start-line="482" selection-end-line="482" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/connection/convolution_2d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="873">
+          <caret line="571" selection-start-line="571" selection-end-line="571" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/function_node.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="244" selection-start-line="244" selection-end-line="244" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/connection/linear.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3816">
+          <caret line="288" selection-start-line="288" selection-end-line="288" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
+        <state relative-caret-position="678">
+          <caret line="497" lean-forward="true" selection-start-line="497" selection-end-line="497" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <marker date="1557498875515" expanded="true" signature="2471:2595" ph="..." />
-            <marker date="1557498875515" expanded="true" signature="4730:4771" ph="..." />
-            <marker date="1557498875515" expanded="true" signature="8314:8380" ph="..." />
-            <marker date="1557498875515" expanded="true" signature="8984:9148" ph="..." />
-            <marker date="1557498875515" expanded="true" signature="10790:10961" ph="..." />
-            <marker date="1557498875515" expanded="true" signature="15322:15325" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="2760:3263" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="2923:3104" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="3139:3263" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="5238:5305" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="5509:5550" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="9031:9135" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="10258:10418" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="10743:10809" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="11413:11577" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="13219:13390" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="18076:18082" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="19914:21932" ph="..." />
+            <marker date="1557770345757" expanded="true" signature="21474:21476" ph="..." />
           </folding>
         </state>
       </provider>
