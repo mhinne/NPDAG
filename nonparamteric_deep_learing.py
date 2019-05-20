@@ -306,6 +306,7 @@ class Network(chainer.ChainList):
             loss.backward()
             optimizer.update()
             loss_list.append(float(loss.data))
+        self.loss = loss_list
         #plt.plot(loss_list)
         #plt.savefig("Loss")
 
