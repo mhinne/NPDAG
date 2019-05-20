@@ -11,16 +11,60 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 
+class OutputLayer(chainer.Chain):
+    def __init__(self, out_size):
+        super().__init__()
+
+        with self.init_scope():
+            self.linear = chainer.links.Linear(None, out_size)
+
+    def penalization(self):
+        return -sum(sum(self.linear.W**2)) if self.linear.W.data is not None else 0
+
+    def __call__(self, x):
+        return self.linear(chainer.functions.mean(x, (2, 3)))
+
+
+class ConvLayer(chainer.Chain):
+    def __init__(self, in_size, out_size):
+        super().__init__()
+
+        with self.init_scope():
+            self.layer = chainer.links.Convolution2D(in_channels=in_size, out_channels=out_size, ksize=3, stride=int(out_size/in_size), pad=1)
+
+    def penalization(self):
+        return -sum(sum(sum(sum(self.layer.W**2)))) if self.layer.W.data is not None else 0
+
+    def __call__(self, x):
+        return self.layer(x)
+
+
+class FirstConvLayer(chainer.Chain):
+    def __init__(self, in_size, out_size):
+        super().__init__()
+
+        with self.init_scope():
+            self.layer = chainer.links.Convolution2D(in_channels=in_size, out_channels=out_size, ksize=3, pad=1)
+
+    def penalization(self):
+        return -sum(sum(sum(sum(self.layer.W**2)))) if self.layer.W.data is not None else 0
+
+    def __call__(self, x):
+        return self.layer(x)
+
 
 def create_link(parent, child):
     input_size, output_size = get_sizes(child.reputation, parent.reputation)
 
     if child.reputation == 0:
-        return chainer.links.Linear(None, output_size)
+        #return chainer.links.Linear(None, output_size)
+        return OutputLayer(output_size)
 
     if parent.reputation == 1:
-        return chainer.links.Convolution2D(input_size, output_size, ksize=3, pad=1)
-    return chainer.links.Convolution2D(input_size, output_size, ksize=3, stride=int(output_size/input_size), pad=1)
+        #return chainer.links.Convolution2D(in_channels=input_size, out_channels=output_size, ksize=3, pad=1)
+        return FirstConvLayer(input_size, output_size)
+    #return chainer.links.Convolution2D(in_channels=input_size, out_channels=output_size, ksize=3, stride=int(output_size/input_size), pad=1)
+    return ConvLayer(input_size, output_size)
 
 
 def get_sizes(child_reputation, parent_reputation, class_count=10, bin_count=5, offset=1):
@@ -127,7 +171,7 @@ class Node(object):
 
 class Network(chainer.ChainList):
 
-    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 20}):
+    def __init__(self, nodes, prior_parameters={"alpha": 1, "phi": 1, "gamma": 5}):
         names = [node.name for node in nodes]
         assert (sorted(names) == sorted(list(set(names))))
         self.prior_parameters = prior_parameters
@@ -174,6 +218,9 @@ class Network(chainer.ChainList):
     @property
     def num_active_parameters(self):
         return sum([node.num_parameters for node in self.nodes if not node.is_inactive])
+
+    def penalization(self):
+        return sum([link.penalization() for link in self.links])
 
 #    def is_orphan(self, node_name):
 #        return self.get_node(node_name).is_orphan
@@ -227,14 +274,21 @@ class Network(chainer.ChainList):
         self.nodes.remove(node)
         self._update_network()
 
+    def compute_weight_prior(self, lam=100.):
+        return lam*self.penalization()
+
     def compute_log_lk(self, batch_size):
         dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][0] #TODO: refactor
         indices = random.sample(range(dataset_size), batch_size)
         targets = {node.name: node.data[indices] for node in self.nodes
                    if node.is_target}
         forward_output = self.forward_pass(indices)
-        return -1*dataset_size*sum([chainer.functions.softmax_cross_entropy(x=forward_output[node.name], t=targets[node.name])
-                                    for node in self.nodes if node.name in targets])
+        lk_term = -1*dataset_size*sum([chainer.functions.softmax_cross_entropy(x=forward_output[node.name], t=targets[node.name])
+                                       for node in self.nodes if node.name in targets])
+        prior_term = self.compute_weight_prior()
+        #print("Likelihood: {}".format(lk_term.data))
+        #print("Prior: {}".format(prior_term.data))
+        return lk_term + prior_term
 
     def compute_model_evidence(self, batch_size):
         dataset_size = [node.data.shape[0] for node in self.nodes if node.is_observed and node.data is not None][
@@ -253,7 +307,7 @@ class Network(chainer.ChainList):
             optimizer.update()
             loss_list.append(float(loss.data))
         #plt.plot(loss_list)
-        #plt.show()
+        #plt.savefig("Loss")
 
     def clear_data(self):
         for node in self.nodes:
@@ -494,22 +548,27 @@ class NetworkSampler(object):
         while sample_index < num_samples:
             for sampler in [current_sample.resample_graph_connection, current_sample.birth_death_sample, current_sample.resample_reputation]:
 
-                DAG_proposal, log_acceptance_ratio = sampler()
+                try:
+                    DAG_proposal, log_acceptance_ratio = sampler()
 
-                DAG_proposal.train_parameters(self.num_itr, self.batch_size)
-                proposed_log_model_evidence = float(DAG_proposal.compute_model_evidence(self.evidence_batch_size).data)
-                current_log_model_evidence = float(current_sample.compute_model_evidence(self.evidence_batch_size).data)
-                corrected_log_acceptance_ratio = log_acceptance_ratio + proposed_log_model_evidence - current_log_model_evidence
-                acceptance_ratio = np.exp(corrected_log_acceptance_ratio)
-                print(acceptance_ratio) # TODO: Debug
-                if acceptance_ratio >= 1 or np.random.binomial(1, acceptance_ratio) == 1:
-                    #sample = copy.deepcopy(DAG_proposal)
-                    #sample.clear_data()
-                    #self.network_samples.append(sample)
-                    current_sample = DAG_proposal
-                    DAG_proposal.plot(save_name='figures/Sample {}.png'.format(sample_index), show=False)
-                    sample_index += 1
-                    print(sample_index) #DEBUG
+                    DAG_proposal.train_parameters(self.num_itr, self.batch_size)
+                    proposed_log_model_evidence = float(DAG_proposal.compute_model_evidence(self.evidence_batch_size).data)
+                    current_log_model_evidence = float(current_sample.compute_model_evidence(self.evidence_batch_size).data)
+                    corrected_log_acceptance_ratio = log_acceptance_ratio + proposed_log_model_evidence - current_log_model_evidence
+                    acceptance_ratio = np.exp(corrected_log_acceptance_ratio)
+                    #print(acceptance_ratio) # TODO: Debug
+                    if acceptance_ratio >= 1 or np.random.binomial(1, acceptance_ratio) == 1:
+                        #sample = copy.deepcopy(DAG_proposal)
+                        #sample.clear_data()
+                        #self.network_samples.append(sample)
+                        current_sample = DAG_proposal
+                        #DAG_proposal.plot(save_name='figures/Sample {}.png'.format(sample_index), show=False)
+                        sample_index += 1
+                        #print(sample_index) #DEBUG
+                except Exception as error:
+                    print(error.message)
+        return current_sample
+
 
 
 
@@ -526,8 +585,9 @@ train_target = chainer.Variable(np.stack([tg.astype("int32")
 
 ## Initial network ##
 a = Node(children=set(), reputation=0., name="a")
-e = Node(children={a}, reputation=1., name="e")
-network = Network({a, e})
+l = Node(children={a}, reputation=0.2, name="l")
+e = Node(children={l}, reputation=1., name="e")
+network = Network({a, e, l})
 a.observe(data=train_target, is_target=True)
 e.observe(data=train_in, is_target=False)
 
@@ -536,8 +596,8 @@ e.observe(data=train_in, is_target=False)
 ## Training ##
 #network.train_parameters(num_itr=500, batch_size=50)
 
-sampler = NetworkSampler(initial_network=network, num_itr=400, batch_size=200, evidence_batch_size=10000)
-sampler.update_network(num_samples=50)
+sampler = NetworkSampler(initial_network=network, num_itr=400, batch_size=100, evidence_batch_size=10000)
+sampler.update_network(num_samples=500)
 
 network.plot()
 plt.show()

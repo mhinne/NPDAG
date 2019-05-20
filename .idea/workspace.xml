@@ -16,29 +16,31 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.4" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="26" />
+          <entry key="png" value="1" />
+          <entry key="py" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="26" />
+          <entry key="Image" value="1" />
+          <entry key="Python" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="126" />
-          <entry key="py" value="10570" />
+          <entry key="py" value="11777" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="10696" />
+          <entry key="Python" value="11903" />
         </counts>
       </usages-collector>
     </session>
@@ -48,7 +50,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7095">
+            <state relative-caret-position="8130">
               <caret line="548" column="78" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -66,32 +68,49 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-195">
-              <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+            <state relative-caret-position="738">
+              <caret line="574" column="13" lean-forward="true" selection-start-line="574" selection-start-column="13" selection-end-line="574" selection-end-column="13" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-                <marker date="1557829566439" expanded="true" signature="2760:3277" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="2923:3104" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="3139:3277" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="5354:5445" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="5649:5690" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="9156:9260" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="10377:10537" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="10862:10928" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="11532:11696" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="13338:13509" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="18195:18202" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="20161:22449" ph="..." />
-                <marker date="1557829566439" expanded="true" signature="21991:21993" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="409:499" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="1474:1477" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="4240:4757" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="4403:4584" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="4619:4757" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="6833:7018" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="6951:7018" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="7222:7263" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="9301:9346" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="11021:11125" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="12242:12402" ph="..." />
+                <marker date="1558353035649" expanded="true" signature="12727:12793" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/math/basic_math.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="659" selection-start-line="659" selection-end-line="659" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="482" selection-start-line="482" selection-end-line="482" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/array/reshape.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="191">
@@ -125,6 +144,9 @@
       <find>get_active_nodes</find>
       <find>dataset_size</find>
       <find>is_inactive</find>
+      <find>show</find>
+      <find>loss</find>
+      <find>penaliz</find>
     </findStrings>
     <replaceStrings>
       <replace>node_name</replace>
@@ -231,6 +253,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1175" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24972677" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -238,7 +261,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291866" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3291866" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -257,47 +280,47 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>potential_pairs</expression-string>
+        <expression-string>self.linear.W</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>{node1.name: node2.name for node1, node2 in potential_pairs}</expression-string>
+        <expression-string>current_sample.penalization()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>train_in.shape</expression-string>
+        <expression-string>sum(list(network.links)[0].penalization())</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>x.shape</expression-string>
+        <expression-string>list(network.links)[0].penalization().shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>W.shape</expression-string>
+        <expression-string>list(network.links)[0].penalization()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>dataset_size*log_lk - self.num_parameters</expression-string>
+        <expression-string>list(network.links)[1].penalization</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.log(dataset_size)</expression-string>
+        <expression-string>list(network.links)[1]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.num_parameters</expression-string>
+        <expression-string>list(network.links)[1].linear.W</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.num_parameters*np.log(dataset_size)</expression-string>
+        <expression-string>list(network.links)[1].linear.W**2</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -357,13 +380,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/forwardmodels.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/link.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -372,27 +389,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7095">
-          <caret line="548" column="78" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/npdag_simple_datasets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/directed_acyclic_graphs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -459,13 +459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="482" selection-start-line="482" selection-end-line="482" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/connection/convolution_2d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="873">
@@ -487,25 +480,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
+    <entry file="file://$PROJECT_DIR$/IndianChefProcess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="35" column="9" lean-forward="true" selection-start-line="35" selection-start-column="9" selection-end-line="35" selection-end-column="9" />
+        <state relative-caret-position="8130">
+          <caret line="548" column="78" selection-start-line="548" selection-start-column="78" selection-end-line="548" selection-end-column="78" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1557829566439" expanded="true" signature="2760:3277" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="2923:3104" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="3139:3277" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="5354:5445" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="5649:5690" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="9156:9260" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="10377:10537" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="10862:10928" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="11532:11696" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="13338:13509" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="18195:18202" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="20161:22449" ph="..." />
-            <marker date="1557829566439" expanded="true" signature="21991:21993" ph="..." />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -514,6 +494,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
           <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/directed_acyclic_graphs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/utils/type_check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="482" selection-start-line="482" selection-end-line="482" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Loss.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/chainer/functions/math/basic_math.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="659" selection-start-line="659" selection-end-line="659" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nonparamteric_deep_learing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="574" column="13" lean-forward="true" selection-start-line="574" selection-start-column="13" selection-end-line="574" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1558353035649" expanded="true" signature="409:499" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="1474:1477" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="4240:4757" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="4403:4584" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="4619:4757" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="6833:7018" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="6951:7018" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="7222:7263" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="9301:9346" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="11021:11125" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="12242:12402" ph="..." />
+            <marker date="1558353035649" expanded="true" signature="12727:12793" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
